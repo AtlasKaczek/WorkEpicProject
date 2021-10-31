@@ -12,4 +12,9 @@ func main() {
 	if err != nil {
 		fmt.Printf("Main 1: An error occured: %v", err)
 	}
+
+	var titles []string
+	var index []int
+	titles, index = epic.CheckFreeGame(freeGame)
+	fmt.Printf("Title: \"%v\" Index: %d\n", titles[0], index[0])
 }
