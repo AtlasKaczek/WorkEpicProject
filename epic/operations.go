@@ -21,3 +21,21 @@ func CheckFreeGame(g Games) ([]string, []int) {
 	}
 	return freeGamesTitles, num
 }
+
+func PrepMessege(g Games, titles []string, index []int) string {
+
+	var msg string
+
+	msg = "Get your free game for this week!\n"
+	for i := 0; i < len(titles); i++ {
+		if i == len(titles)-1 {
+			msg += "<https://www.epicgames.com/store/pl/p/" + g.GetUrlSlug(index[i]) + "|" + titles[i] + ">"
+		} else {
+			msg += "<https://www.epicgames.com/store/pl/p/" + g.GetUrlSlug(index[i]) + "|" + titles[i] + ">\n"
+		}
+
+	}
+	msg += "\nHave fun :)"
+
+	return msg
+}

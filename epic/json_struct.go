@@ -99,3 +99,7 @@ func (g Games) GetPromotionEnd(i int) time.Time {
 func (g Games) GetDiscountedPrice(i int) int {
 	return g.Data.Catalog.SearchStore.Elements[i].Price.TotalPrice.DiscountPrice
 }
+
+func (g Games) GetUrlSlug(i int) string {
+	return g.Data.Catalog.SearchStore.Elements[i].URLSlug
+}

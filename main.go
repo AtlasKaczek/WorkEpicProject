@@ -17,4 +17,6 @@ func main() {
 	var index []int
 	titles, index = epic.CheckFreeGame(freeGame)
 	fmt.Printf("Title: \"%v\" Index: %d\n", titles[0], index[0])
+
+	fmt.Println(epic.PrepMessege(freeGame, titles, index))
 }
