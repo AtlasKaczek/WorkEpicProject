@@ -1,6 +1,7 @@
 package epic
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -27,4 +28,21 @@ func GetJSON(URL string) (*[]byte, error) {
 	body, _ := ioutil.ReadAll(res.Body)
 
 	return &body, nil
+}
+
+func ParseJson(url string) (Games, error) {
+	var freeGame Games
+
+	res, err := GetJSON(url)
+	if err != nil {
+		fmt.Printf("ParseJson 1: An error occured: %v", err)
+		return Games{}, err
+	}
+
+	jsonErr := json.Unmarshal(*res, &freeGame)
+	if jsonErr != nil {
+		fmt.Printf("ParseJson 1: An error occured: %v", jsonErr)
+		return Games{}, jsonErr
+	}
+	return freeGame, nil
 }
