@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+//Structure
 type Games struct {
 	Data Data `json:"data"`
 }
@@ -72,4 +73,29 @@ type PromotionalOffer struct {
 type DiscountSetting struct {
 	DiscountType       string `json:"discountType"`
 	DiscountPercentage int    `json:"discountPercentage"`
+}
+
+//Useful getters
+func (g Games) GetAllElements() []Element {
+	return g.Data.Catalog.SearchStore.Elements
+}
+
+func (g Games) GetElementTitle(i int) string {
+	return g.Data.Catalog.SearchStore.Elements[i].Title
+}
+
+func (g Games) GetPromotions(i int) []PromotionalOffers {
+	return g.Data.Catalog.SearchStore.Elements[i].Promotions.PromotionalOffers
+}
+
+func (g Games) GetPromotionStart(i int) time.Time {
+	return g.Data.Catalog.SearchStore.Elements[i].Promotions.PromotionalOffers[0].PromotionalOffer[0].StartDate
+}
+
+func (g Games) GetPromotionEnd(i int) time.Time {
+	return g.Data.Catalog.SearchStore.Elements[i].Promotions.PromotionalOffers[0].PromotionalOffer[0].EndDate
+}
+
+func (g Games) GetDiscountedPrice(i int) int {
+	return g.Data.Catalog.SearchStore.Elements[i].Price.TotalPrice.DiscountPrice
 }
