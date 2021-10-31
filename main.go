@@ -7,6 +7,7 @@ import (
 
 func main() {
 	epicUrl := "https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=pl&country=PL&allowCountries=PL"
+	slackUrl := "https://hooks.slack.com/services/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"
 
 	freeGame, err := epic.ParseJson(epicUrl)
 	if err != nil {
@@ -16,7 +17,9 @@ func main() {
 	var titles []string
 	var index []int
 	titles, index = epic.CheckFreeGame(freeGame)
-	fmt.Printf("Title: \"%v\" Index: %d\n", titles[0], index[0])
 
-	fmt.Println(epic.PrepMessege(freeGame, titles, index))
+	_, err = epic.SendSlackMessege(epic.PrepMessege(freeGame, titles, index), slackUrl)
+	if err != nil {
+		fmt.Printf("Main 2: An error occured: %v", err)
+	}
 }
