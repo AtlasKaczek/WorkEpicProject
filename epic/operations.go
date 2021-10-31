@@ -22,7 +22,7 @@ func CheckFreeGame(g Games) ([]string, []int) {
 	return freeGamesTitles, num
 }
 
-func PrepMessege(g Games, titles []string, index []int) string {
+func PrepMessage(g Games, titles []string, index []int) string {
 
 	var msg string
 
