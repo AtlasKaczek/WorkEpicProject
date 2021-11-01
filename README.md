@@ -5,10 +5,12 @@ Each week, Epic Games Store makes one non free-to-play game available for free. 
 It is a Go application that retrieves information about which game is discounted this way for the current week from this site and sends a Slack message containing the game's title with a link to game's store page. This app uses a webhook found through some tinkering on epic games store free games page:
 ->f12
 ->Go to "Network"
-->Ctrl+r to relode the page
-->Ctrl+f to search for some game that's currently free
+->Ctrl+r to reloade the page
+->Ctrl+f to search for some game that's currently free and click on the result
 ->Go to "Headers"
 ->"Request url" is what we want
+
+This app uses "Incoming WebHooks" app extension to slack channel. Feel free to change url given by this extension to use this on your slack channel.
 
 ## Project files
 ### json_func.go

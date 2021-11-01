@@ -18,8 +18,9 @@ func main() {
 	var index []int
 	titles, index = epic.CheckFreeGame(freeGame)
 
-	_, err = epic.SendSlackMessege(epic.PrepMessege(freeGame, titles, index), slackUrl)
+	_, err = epic.SendSlackMessege(epic.PrepMessage(freeGame, titles, index), slackUrl)
 	if err != nil {
 		fmt.Printf("Main 2: An error occured: %v", err)
 	}
+	fmt.Println("done")
 }
