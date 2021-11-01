@@ -1,26 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"stankryj/WorkEpicProject/epic"
+	"time"
 )
 
 func main() {
 	epicUrl := "https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=pl&country=PL&allowCountries=PL"
-	slackUrl := "https://hooks.slack.com/services/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"
-
-	freeGame, err := epic.ParseJson(epicUrl)
-	if err != nil {
-		fmt.Printf("Main 1: An error occured: %v", err)
+	slackUrl := "https://hooks.slack.com/services/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"
+	for {
+		epic.EpicWeekly(epicUrl, slackUrl)
+		time.Sleep(time.Minute * 60)
 	}
-
-	var titles []string
-	var index []int
-	titles, index = epic.CheckFreeGame(freeGame)
-
-	_, err = epic.SendSlackMessege(epic.PrepMessage(freeGame, titles, index), slackUrl)
-	if err != nil {
-		fmt.Printf("Main 2: An error occured: %v", err)
-	}
-	fmt.Println("done")
 }

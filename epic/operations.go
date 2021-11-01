@@ -1,6 +1,7 @@
 package epic
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -38,4 +39,21 @@ func PrepMessage(g Games, titles []string, index []int) string {
 	msg += "\nHave fun :)"
 
 	return msg
+}
+
+func EpicWeekly(epicUrl string, slackUrl string) {
+	freeGame, err := ParseJson(epicUrl)
+	if err != nil {
+		fmt.Printf("Main 1: An error occured: %v", err)
+	}
+
+	var titles []string
+	var index []int
+	titles, index = CheckFreeGame(freeGame)
+
+	_, err = SendSlackMessege(PrepMessage(freeGame, titles, index), slackUrl)
+	if err != nil {
+		fmt.Printf("Main 2: An error occured: %v", err)
+	}
+	fmt.Println("done")
 }
