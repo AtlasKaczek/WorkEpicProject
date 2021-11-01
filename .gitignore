@@ -1,3 +1,6 @@
 # Ignored file extensions
 .vscode/
 WorkEpicProject
+WorkEpicProject_freebsd
+WorkEpicProject_linux64
+WorkEpicProject_linux
