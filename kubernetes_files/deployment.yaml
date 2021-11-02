@@ -6,6 +6,9 @@ metadata:
     app: free-game
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: free-game
   template:
     metadata:
       labels:
