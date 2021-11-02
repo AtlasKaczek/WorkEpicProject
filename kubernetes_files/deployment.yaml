@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: free-game-deployment
+  labels:
+    app: free-game
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: free-game
+  template:
+    metadata:
+      labels:
+        app: free-game
+    spec:
+      containers:
+      - name: epic-app
+        image: atlaskaczek/workepicproject:v1
+        imagePullPolicy: Always
+        env:
+          - name: SLACKURL
+            valueFrom:
+              secretKeyRef:
+                name: slack-secret
+                key: slack_url
+        ports:
+        - containerPort: 5000
