@@ -4,7 +4,7 @@
 
 Each week, Epic Games Store makes one non free-to-play game available for free. You can see which game here: https://www.epicgames.com/store/en-US/free-games (https://www.epicgames.com/store/pl/free-games for Polish version).
 
-It is a Go application that retrieves information about which game is discounted this way for the current week from this site and sends a Slack message containing the game's title with a link to game's store page. This app uses a webhook found through some tinkering on epic games store free games page:
+It is a Go application that retrieves information about which game is discounted this way for the current week from this site and sends a Slack message containing the game's title with a link to game's store page. This app uses a request found through some tinkering on epic games store free games page:
 > 1. f12
 > 1. Go to "Network"
 > 1. Ctrl+r to reloade the page
@@ -53,7 +53,7 @@ Basic main function that sticks together our app.
 
 ### Makefile
 
-Adds few commends, so it's easier to use our app.
+Contains few parameters, so it's easier to use our app.
 
 - ```make run```
 Compiles and runs our app.
@@ -77,6 +77,10 @@ Tells github what files to ignore.
 
 ## How to run the app
 
+At first pull the code:
+
+    git clone https://github.com/AtlasKaczek/WorkEpicProject.git
+
 ### Locally
 
 Run command and set SLACKURL to your webhook
@@ -97,7 +101,7 @@ The second step is to run a container of our image:
 
     kubectl apply -f kubernetes_files/namespace.yaml
 
-Change SLACKURL in `kubernetes_files/secret.yaml` to your webhook
+Change `slack_url` in `kubernetes_files/secret.yaml` to your webhook
 
     kubectl -n epic-free-game apply -f kubernetes_files/secret.yaml
     kubectl -n epic-free-game apply -f kubernetes_files/deployment.yaml
