@@ -41,19 +41,24 @@ func PrepMessage(g Games, titles []string, index []int) string {
 	return msg
 }
 
-func EpicWeekly(epicUrl string, slackUrl string) {
-	freeGame, err := ParseJson(epicUrl)
+func EpicWeekly(epicUrl string, slackUrl string, oldGame *string) (string, error) {
+	freeGame, err := ParseJSON(epicUrl)
 	if err != nil {
 		fmt.Printf("Main 1: An error occured: %v", err)
+		return "", err
 	}
 
 	var titles []string
 	var index []int
 	titles, index = CheckFreeGame(freeGame)
 
-	_, err = SendSlackMessege(PrepMessage(freeGame, titles, index), slackUrl)
-	if err != nil {
-		fmt.Printf("Main 2: An error occured: %v", err)
+	if titles[0] != *oldGame {
+		_, err = SendSlackMessege(PrepMessage(freeGame, titles, index), slackUrl)
+		if err != nil {
+			fmt.Printf("Main 2: An error occured: %v", err)
+			return "", err
+		}
 	}
-	fmt.Println("done")
+	*oldGame = titles[0]
+	return *oldGame, nil
 }
