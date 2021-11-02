@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: epicPod
+  labels:
+    app: free-game
+spec:
+  containers:
+  - name: epicAPP
+    image: atlaskaczek/workepicproject:v1
+    imagePullPolicy: Always
+    env:
+      - name: SLACKURL
+        valueFrom:
+          secretKeyRef:
+            name: slack-secret
+            key: slack_url
+    ports:
+    - containerPort: 5000
