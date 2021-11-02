@@ -18,20 +18,22 @@ Contains 2 functions.
 "getJson"
 It takes an url (string) from epic games store free games page and makes a http.Get request (it doesn't really change so leave it as it is); returns json body ([]byte) and an error (that should be nil).
 
-"parseJson"
+"ParseJSON"
 It also takes an url (string) from epic games store free games page and gives it to "getJson" function and unmarshals (thanks to structures in json_struct.go file) the result. Returns a "Games" object and an error (that should be nil).
 
 ### json_structure.go
 Contains only nessecary structures (which are a representation of epic's json file) and useful functions (getters) that return values from "Games" object. We will them need in other functions.
 
 ### operations.go
-Contains 2 functions.
+Contains 3 functions.
 "CheckFreeGame"
 As it's name says, it checks which games is free because of a promotion for current week and returns a list of titles and their indexes in "Games" object.
 
 "PrepMessage"
 It prepares the massage that will be sent to slack in form of json syntax. The message contains a short informational text and free game names with appropriate hiperlinks to their store pages.
 
+"EpicWeekly"
+It checks every 60 minutes if there is new free game and uses "SendSlackMessage".
 ### slack_func.go
 Contains 1 function.
 "SendSlackMessege"
@@ -39,3 +41,38 @@ It takes "PrepMessage" result and url (string), marshals the text and sends it t
 
 ### main.go
 Basic main function that sticks together our app.
+
+### Makefile
+Adds few commends, so it's easier to use our app.
+
+- make run
+Compiles and runs our app.
+
+- make build
+Compiles our app.
+
+- make compile
+Compiles our app for other OS and platforms (linux, linux64 and freebsd)
+
+- make tidy
+Checks binary for our app
+
+### Dockerfile
+Help us create docker image so we can make a container running application.
+
+### .gitignore
+Tells github what files to ignore.
+
+## How to run the app
+### Locally
+Run command and set SLACKURL to your webhook
+    export SLACKURL="yourSlackURL"
+Then run "make run" command in your local app directory
+
+### Locally via Docker
+First of you need to create an image by running a command:
+    docker build -t workepicproject:v1
+The second step is to run a container of our image:
+    docker run --rm -e SLACKURL= --name epiccontainer workepicproject:v1
+
+### Externally via Kubernetes
