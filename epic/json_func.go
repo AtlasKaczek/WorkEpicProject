@@ -30,18 +30,18 @@ func GetJSON(URL string) (*[]byte, error) {
 	return &body, nil
 }
 
-func ParseJson(url string) (Games, error) {
+func ParseJSON(url string) (Games, error) {
 	var freeGame Games
 
 	res, err := GetJSON(url)
 	if err != nil {
-		fmt.Printf("ParseJson 1: An error occured: %v", err)
+		fmt.Printf("ParseJSON 1: An error occured: %v", err)
 		return Games{}, err
 	}
 
 	jsonErr := json.Unmarshal(*res, &freeGame)
 	if jsonErr != nil {
-		fmt.Printf("ParseJson 1: An error occured: %v", jsonErr)
+		fmt.Printf("ParseJSON 1: An error occured: %v", jsonErr)
 		return Games{}, jsonErr
 	}
 	return freeGame, nil
