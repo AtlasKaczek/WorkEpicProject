@@ -6,9 +6,6 @@ metadata:
     app: free-game
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: free-game
   template:
     metadata:
       labels:
@@ -24,5 +21,3 @@ spec:
               secretKeyRef:
                 name: slack-secret
                 key: slack_url
-        ports:
-        - containerPort: 5000
