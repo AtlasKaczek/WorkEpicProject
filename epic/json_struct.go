@@ -100,6 +100,6 @@ func (g Games) GetDiscountedPrice(i int) int {
 	return g.Data.Catalog.SearchStore.Elements[i].Price.TotalPrice.DiscountPrice
 }
 
-func (g Games) GetUrlSlug(i int) string {
-	return g.Data.Catalog.SearchStore.Elements[i].URLSlug
+func (g Games) GetProductSlug(i int) string {
+	return g.Data.Catalog.SearchStore.Elements[i].ProductSlug
 }

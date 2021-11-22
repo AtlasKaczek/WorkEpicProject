@@ -23,7 +23,7 @@ func TestParseJSON(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if freeGame.GetUrlSlug(0) == "" {
+	if freeGame.GetProductSlug(0) == "" {
 		t.Errorf("Games object is empty")
 	}
 }
